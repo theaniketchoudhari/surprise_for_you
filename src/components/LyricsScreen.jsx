@@ -135,7 +135,7 @@ export default function LyricsScreen() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 1, ease: "easeInOut" }}
-                    className="absolute inset-0 flex flex-col gap-6 items-center justify-center pointer-events-none "
+                    className="fixed inset-0 z-50 flex flex-col gap-6 items-center justify-center pointer-events-none p-4"
                 >
                     <motion.div
                         initial={{ opacity: 0, scale: 0.8 }}
@@ -148,7 +148,7 @@ export default function LyricsScreen() {
                         initial={{ opacity: 0, y: 50, scale: 0.8 }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         transition={{ delay: 1, duration: 1, ease: "easeInOut" }}
-                        className="text-3xl md:text-4xl font-semibold px-4 text-center">
+                        className="text-2xl sm:text-3xl md:text-4xl font-semibold px-4 w-full max-w-[95vw] text-center leading-snug break-words">
                         For My Haseen Girl❤️
                     </motion.h2>
                 </motion.div>

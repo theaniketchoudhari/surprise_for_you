@@ -5,6 +5,7 @@ import Music from "@/components/Music"
 import { motion, AnimatePresence } from "framer-motion"
 import Screen1 from "@/components/Screen1"
 import Screen2 from "@/components/Screen2"
+import SurpriseFeature from "@/components/SurpriseFeature"
 import { useState } from "react"
 
 export default function Home() {
@@ -12,15 +13,30 @@ export default function Home() {
   const [musicStarted, setMusicStarted] = useState(false)
 
   return (
-    <div className="min-h-screen bg-black bg-gradient-to-tr from-purple-950/80 via-black to-pink-950/70">
+    <div className="min-h-screen flex items-center justify-center bg-black bg-gradient-to-tr from-purple-950/80 via-black to-pink-950/70">
 
       <AnimatePresence mode="wait">
         {currentScreen === 1 && <Screen1 key="screen1" onNext={() => setCurrentScreen(2)} />}
         {currentScreen === 2 && <Screen2 key="screen2" onNext={() => {
           setCurrentScreen(3)
-          setMusicStarted(true)
         }} />}
-        {currentScreen === 3 && <LyricsScreen key="screen3" />}
+        <div className={currentScreen === 3 ? "w-full flex items-center justify-center h-full min-h-screen" : "hidden"}>
+          {currentScreen >= 3 && (
+            <motion.div
+              key="screen3"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="w-full flex items-center justify-center"
+            >
+              <SurpriseFeature onNext={() => {
+                setCurrentScreen(4)
+                setMusicStarted(true)
+              }} />
+            </motion.div>
+          )}
+        </div>
+        {currentScreen === 4 && <LyricsScreen key="screen4" />}
       </AnimatePresence>
 
       {musicStarted && <Music shouldPlay={musicStarted} />}
@@ -34,7 +50,7 @@ export default function Home() {
           delay: 1,
         }}
         className="fixed bottom-4 right-4 text-sm text-white/40 pointer-events-none z-50">
-        @anujbuilds
+        @theaniketchoudhari
       </motion.div>
     </div>
   )

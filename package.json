@@ -12,6 +12,7 @@
     "framer-motion": "^12.23.22",
     "lucide-react": "^0.544.0",
     "next": "15.5.4",
+    "peerjs": "^1.5.5",
     "react": "19.1.0",
     "react-dom": "19.1.0"
   },
@@ -20,6 +21,7 @@
     "@tailwindcss/postcss": "^4",
     "eslint": "^9",
     "eslint-config-next": "15.5.4",
+    "peer": "^1.0.2",
     "tailwindcss": "^4"
   }
 }
