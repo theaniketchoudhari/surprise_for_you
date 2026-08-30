@@ -8,6 +8,22 @@ const ICE_SERVERS = {
     { urls: "stun:stun.l.google.com:19302" },
     { urls: "stun:stun1.l.google.com:19302" },
     { urls: "stun:stun2.l.google.com:19302" },
+    // Free TURN servers from Open Relay Project (needed for cross-network on production)
+    {
+      urls: "turn:openrelay.metered.ca:80",
+      username: "openrelayproject",
+      credential: "openrelayproject",
+    },
+    {
+      urls: "turn:openrelay.metered.ca:443",
+      username: "openrelayproject",
+      credential: "openrelayproject",
+    },
+    {
+      urls: "turn:openrelay.metered.ca:443?transport=tcp",
+      username: "openrelayproject",
+      credential: "openrelayproject",
+    },
   ]
 }
 
@@ -119,8 +135,7 @@ export default function LiveReceiverPage() {
 
   useEffect(() => {
     const initReceiver = async () => {
-      // Clear any stale connection data on the server when we refresh
-      await fetch("/api/signal", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ type: "reset" }) })
+      // DO NOT reset here — sender may already have posted an offer!
       startPolling()
       log("Receiver ready. Waiting for sender...")
     }
@@ -183,10 +198,9 @@ export default function LiveReceiverPage() {
         <div className="bg-gray-900/60 border border-gray-800 rounded-xl p-5 text-sm text-gray-400 w-full max-w-xl">
           <p className="font-semibold text-white mb-2">How to connect:</p>
           <ol className="list-decimal list-inside space-y-1">
-            <li>Keep this page open</li>
-            <li>Open <span className="text-pink-400">localhost:3000</span> in another window</li>
-            <li>Click through to the surprise screen</li>
-            <li>Click the camera button and allow access</li>
+            <li>Keep this page open on your device</li>
+            <li>She opens the surprise link on her device</li>
+            <li>She clicks through and allows camera access</li>
             <li>Video will appear here automatically ✨</li>
           </ol>
         </div>
